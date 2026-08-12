@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hakkımda — Umut Seçkin</title>
+  <meta name="description" content="Umut Seçkin kimdir: grafik tasarım, karakter tasarımı, marka çalışmaları ve 3B sanat.">
+  <link rel="icon" href="gorseller/kertenkele.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="ust-bar">
+    <a class="imza" href="index.html">Umut Seçkin</a>
+    <button class="menu-dugme" type="button" id="menuAc" aria-expanded="false" aria-controls="menu">Menü</button>
+  </header>
+
+  <nav class="menu-katman" id="menu" data-acik="false" aria-label="Ana menü">
+    <button class="menu-kapat" type="button" id="menuKapat">Kapat</button>
+    <a class="menu-baglanti" href="index.html" style="--i:1">Ana Sayfa</a>
+    <a class="menu-baglanti" href="projeler.html" style="--i:2">Projelerim</a>
+    <a class="menu-baglanti" href="hakkimda.html" style="--i:3" aria-current="page">Hakkımda</a>
+    <a class="menu-baglanti" href="iletisim.html" style="--i:4">İletişim</a>
+  </nav>
+
+  <main>
+    <section class="bolum bolum--ilk">
+      <div class="motif motif--sol" aria-hidden="true"><img class="motif-ic" src="gorseller/kertenkele.png" alt="" data-hiz="0.12" data-fare="10"></div>
+
+      <div class="kabuk">
+        <div class="bolum-basi anim">
+          <p class="etiket">Kimim</p>
+          <h1 class="sayfa-baslik">Hakkımda</h1>
+        </div>
+
+        <div class="hakkimda-duzen">
+
+          <div class="portre anim">
+            <img src="gorseller/portre.jpg" alt="Umut Seçkin'in siyah beyaz portresi">
+          </div>
+
+          <div class="hakkimda-metin metin-serif anim" style="--gecikme:.12s">
+            <p>
+              Ben Umut Seçkin. 25 yaşındayım ve Ankara'da yaşayan bir tasarımcıyım.
+              Grafik tasarım, karakter tasarımı, marka ve branding çalışmaları ile
+              3B sanat alanlarında üretiyorum; bu alanlarda isteyenlere hizmet de veriyorum.
+            </p>
+            <p>
+              Beni en çok ilgilendiren şey, dijital bir yüzeyin nasıl olup da maddi
+              bir şey gibi durabildiği. Bir yüzeyin ağırlığı, bir ışığın nereden
+              geldiği, bir hareketin ne kadar sürdüğü — bunlar bende renk seçiminden
+              önce geliyor.
+            </p>
+            <p>
+              Çalışırken önce kağıtta düşünüyor, sonra ekranda kuruyorum.
+              Bir kararı savunamıyorsam geri alıyorum.
+            </p>
+          </div>
+
+          <div class="araclar anim" style="--gecikme:.24s">
+            <h2>Kullandığım Araçlar</h2>
+            <!-- DEĞİŞTİR: Gerçekten kullandıklarını bırak, kalanını sil. -->
+            <ul>
+              <li>Figma</li>
+              <li>HTML &amp; CSS</li>
+              <li>Blender</li>
+              <li>Adobe Illustrator</li>
+              <li>Adobe Photoshop</li>
+              <li>After Effects</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="alt-bilgi">
+    <div class="kabuk">
+      <ul class="alt-menu">
+        <li><a href="index.html">Ana Sayfa</a></li>
+        <li><a href="projeler.html">Projelerim</a></li>
+        <li><a href="hakkimda.html" aria-current="page">Hakkımda</a></li>
+        <li><a href="iletisim.html">İletişim</a></li>
+      </ul>
+      <p class="telif">© 2026 Umut Seçkin</p>
+    </div>
+  </footer>
+
+  <script src="js/menu.js"></script>
+  <script src="js/animasyon.js"></script>
+</body>
+</html>

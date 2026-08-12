@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Umut Seçkin — Gerçeküstü Dijital Dünyalar</title>
+  <meta name="description" content="Umut Seçkin'in kişisel portfolyosu: grafik tasarım, karakter tasarımı, marka çalışmaları ve 3B sanat.">
+  <link rel="icon" href="gorseller/kertenkele.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="ust-bar">
+    <a class="imza" href="index.html">Umut Seçkin</a>
+    <button class="menu-dugme" type="button" id="menuAc" aria-expanded="false" aria-controls="menu">Menü</button>
+  </header>
+
+  <nav class="menu-katman" id="menu" data-acik="false" aria-label="Ana menü">
+    <button class="menu-kapat" type="button" id="menuKapat">Kapat</button>
+    <a class="menu-baglanti" href="index.html" style="--i:1" aria-current="page">Ana Sayfa</a>
+    <a class="menu-baglanti" href="projeler.html" style="--i:2">Projelerim</a>
+    <a class="menu-baglanti" href="hakkimda.html" style="--i:3">Hakkımda</a>
+    <a class="menu-baglanti" href="iletisim.html" style="--i:4">İletişim</a>
+  </nav>
+
+  <main>
+
+    <section class="acilis">
+      <div class="motif motif--merkez" aria-hidden="true"><img class="motif-ic" src="gorseller/kertenkele.png" alt="" data-hiz="0.10" data-fare="18"></div>
+      <h1 class="dev-baslik acilis-baslik">Gerçeküstü <em>Dijital</em> Dünyalar</h1>
+      <a class="kaydir" href="#serit">
+        <span class="hat" aria-hidden="true"></span>
+        <span class="etiket">Keşfetmek için kaydır</span>
+      </a>
+    </section>
+
+    <div class="serit" id="serit" aria-hidden="true">
+      <div class="serit-ic">
+        <span>Grafik Tasarım</span><span class="serit-nokta"></span>
+        <span>Karakter Tasarımı</span><span class="serit-nokta"></span>
+        <span>Marka &amp; Branding</span><span class="serit-nokta"></span>
+        <span>3B Sanat</span><span class="serit-nokta"></span>
+        <span>Grafik Tasarım</span><span class="serit-nokta"></span>
+        <span>Karakter Tasarımı</span><span class="serit-nokta"></span>
+        <span>Marka &amp; Branding</span><span class="serit-nokta"></span>
+        <span>3B Sanat</span><span class="serit-nokta"></span>
+      </div>
+    </div>
+
+    <section class="bolum" id="secili">
+      <div class="kabuk">
+        <div class="bolum-basi anim">
+          <p class="etiket">Seçili işler</p>
+          <h2 class="sayfa-baslik">Ne Yapıyorum</h2>
+        </div>
+
+        <p class="metin-serif giris-metin anim">
+          25 yaşında bir tasarımcıyım. Grafik tasarım, karakter tasarımı, marka ve
+          branding çalışmaları ile 3B sanat alanlarında üretiyorum; hepsinde aynı şeyi
+          arıyorum: ekranda gerçeğe benzemeyen ama inandırıcı duran bir dünya.
+        </p>
+
+        <div class="izgara">
+          <a class="proje anim" href="projeler.html">
+            <div class="proje-gorsel">
+              <img src="gorseller/orka.jpg" alt="ORKA enerji içeceği kutu serisi, üç boyutlu ürün görseli">
+            </div>
+            <div class="proje-bilgi">
+              <h3 class="proje-ad">ORKA Enerji İçeceği</h3>
+              <span class="proje-yil">Marka · 3B</span>
+            </div>
+            <p class="proje-aciklama">Kurgusal bir enerji içeceği markası: piksel maskot, üç aromalı kutu serisi ve 3B ürün görselleştirmesi.</p>
+          </a>
+
+          <a class="proje anim" href="projeler.html" style="--gecikme:.12s">
+            <div class="proje-gorsel">
+              <img src="gorseller/eagicy.jpg" alt="EAGICY moda koleksiyonu afişi" class="odak-orta">
+            </div>
+            <div class="proje-bilgi">
+              <h3 class="proje-ad">EAGICY</h3>
+              <span class="proje-yil">Afiş</span>
+            </div>
+            <p class="proje-aciklama">Bir sokak giyim koleksiyonu için lookbook afişi; soğuk mavi fotoğraf üzerinde asit yeşili tipografi.</p>
+          </a>
+        </div>
+
+        <div class="devam anim">
+          <a class="devam-baglanti" href="projeler.html">Bütün projeler</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="alt-bilgi">
+    <div class="kabuk">
+      <ul class="alt-menu">
+        <li><a href="index.html" aria-current="page">Ana Sayfa</a></li>
+        <li><a href="projeler.html">Projelerim</a></li>
+        <li><a href="hakkimda.html">Hakkımda</a></li>
+        <li><a href="iletisim.html">İletişim</a></li>
+      </ul>
+      <p class="telif">© 2026 Umut Seçkin</p>
+    </div>
+  </footer>
+
+  <script src="js/menu.js"></script>
+  <script src="js/animasyon.js"></script>
+</body>
+</html>

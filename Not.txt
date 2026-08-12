@@ -1,0 +1,1 @@
+Site, Ödev 8'de teslim ettiğim taslağın kodlanmış hâlidir; palet, tipografi ve sayfa düzeni oradan geldi. HTML/CSS iskeleti, animasyon kodu ve kertenkele illüstrasyonu yapay zekâ yardımıyla, benim yönlendirmemle üretildi. Projelerdeki ORKA ve 'İnternet Gençleri Öldürdü' görselleri de yapay zekâ araçlarıyla ürettiğim işlerdir. Site GitHub Pages üzerinden yayınlandı.

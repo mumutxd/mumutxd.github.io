@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>İletişim — Umut Seçkin</title>
+  <meta name="description" content="Umut Seçkin ile iletişime geçin.">
+  <link rel="icon" href="gorseller/kertenkele.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="ust-bar">
+    <a class="imza" href="index.html">Umut Seçkin</a>
+    <button class="menu-dugme" type="button" id="menuAc" aria-expanded="false" aria-controls="menu">Menü</button>
+  </header>
+
+  <nav class="menu-katman" id="menu" data-acik="false" aria-label="Ana menü">
+    <button class="menu-kapat" type="button" id="menuKapat">Kapat</button>
+    <a class="menu-baglanti" href="index.html" style="--i:1">Ana Sayfa</a>
+    <a class="menu-baglanti" href="projeler.html" style="--i:2">Projelerim</a>
+    <a class="menu-baglanti" href="hakkimda.html" style="--i:3">Hakkımda</a>
+    <a class="menu-baglanti" href="iletisim.html" style="--i:4" aria-current="page">İletişim</a>
+  </nav>
+
+  <main>
+    <section class="bolum bolum--ilk">
+      <div class="kabuk">
+        <h1 class="gizli-baslik">İletişim</h1>
+
+        <div class="iletisim-kart anim">
+          <div class="motif motif--kart" aria-hidden="true"><img class="motif-ic" src="gorseller/kertenkele.png" alt="" data-hiz="0.06" data-fare="8"></div>
+          <p class="etiket">Yazmak için</p>
+          <a class="eposta" href="mailto:umut.seckin@gmail.com">umut.seckin@gmail.com</a>
+        </div>
+
+        <p class="iletisim-not anim" style="--gecikme:.15s">
+          Ankara'da yaşıyorum. Grafik tasarım, karakter tasarımı, marka çalışmaları
+          ve 3B sanat işleri için serbest iş birliklerine açığım.
+        </p>
+
+        <!-- DEĞİŞTİR: Hesap adreslerini yazınca bu bloğun başındaki ve sonundaki
+             yorum işaretlerini kaldır. Adressiz bağlantı teslimde bulunmasın.
+        <div class="baglantilar">
+          <a href="https://instagram.com/KULLANICI_ADIN" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://behance.net/KULLANICI_ADIN" target="_blank" rel="noopener">Behance</a>
+        </div>
+        -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="alt-bilgi">
+    <div class="kabuk">
+      <ul class="alt-menu">
+        <li><a href="index.html">Ana Sayfa</a></li>
+        <li><a href="projeler.html">Projelerim</a></li>
+        <li><a href="hakkimda.html">Hakkımda</a></li>
+        <li><a href="iletisim.html" aria-current="page">İletişim</a></li>
+      </ul>
+      <p class="telif">© 2026 Umut Seçkin</p>
+    </div>
+  </footer>
+
+  <script src="js/menu.js"></script>
+  <script src="js/animasyon.js"></script>
+</body>
+</html>
