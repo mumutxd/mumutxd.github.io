@@ -1,0 +1,841 @@
+/* ==========================================================================
+   Umut Seçkin — Kişisel Portfolyo
+   GİT423 Web Tasarımı · Final
+   Tasarım kararları Ödev 8 taslağından taşındı.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Poppins:wght@300;400;500&display=swap&subset=latin,latin-ext');
+
+/* --------------------------------------------------------------------------
+   1. Tasarım değişkenleri (palet, tipografi, boşluk)
+   -------------------------------------------------------------------------- */
+
+:root {
+  /* Renk — kızıl tonu kertenkelenin damar/göz parlamasından alındı */
+  --zemin:        #050505;
+  --zemin-yuzey:  #121110;
+  --kagit:        #EDEAE5;
+  --kagit-solgun: #8C8783;
+  --kizil:        #C8102E;
+  --kizil-parlak: #FF2E3E;
+  --cizgi:        rgba(237, 234, 229, 0.18);
+
+  /* Tipografi */
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans:  'Poppins', 'Helvetica Neue', Arial, sans-serif;
+
+  /* Boşluk ölçeği */
+  --bosluk-xs: 0.5rem;
+  --bosluk-s:  1rem;
+  --bosluk-m:  2rem;
+  --bosluk-l:  4rem;
+  --bosluk-xl: 7rem;
+
+  /* Kabuk */
+  --kabuk-en: 1240px;
+  --kenar:    2.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   2. Sıfırlama ve temel
+   -------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--zemin);
+  color: var(--kagit);
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Klavyeyle gezinenler için görünür odak */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--kizil-parlak);
+  outline-offset: 4px;
+}
+
+.kabuk {
+  width: 100%;
+  max-width: var(--kabuk-en);
+  margin-inline: auto;
+  padding-inline: var(--kenar);
+}
+
+/* Ekranda görünmeyen ama ekran okuyucunun okuduğu metin */
+.gizli-baslik {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   3. Tipografi ölçeği
+   -------------------------------------------------------------------------- */
+
+.dev-baslik {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(2.75rem, 10vw, 8rem);
+  line-height: 0.94;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.sayfa-baslik {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(2.25rem, 7vw, 5.5rem);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  margin: 0;
+  text-align: center;
+}
+
+.etiket {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--kagit-solgun);
+  margin: 0;
+}
+
+.metin-serif {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.0625rem;
+  line-height: 1.85;
+}
+
+/* --------------------------------------------------------------------------
+   4. Üst bar ve menü
+   -------------------------------------------------------------------------- */
+
+.ust-bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.75rem var(--kenar);
+}
+
+.imza {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 0.9375rem;
+  letter-spacing: 0.04em;
+  color: var(--kagit);
+}
+
+.menu-dugme {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--kagit);
+  background: transparent;
+  border: 1px solid var(--kagit);
+  border-radius: 999px;
+  padding: 0.55rem 1.35rem;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.menu-dugme:hover {
+  background-color: var(--kagit);
+  color: var(--zemin);
+}
+
+/* Açılan tam ekran menü */
+.menu-katman {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background-color: var(--zemin);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--bosluk-s);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.menu-katman[data-acik="true"] {
+  opacity: 1;
+  visibility: visible;
+}
+
+.menu-kapat {
+  position: absolute;
+  top: 1.6rem;
+  right: var(--kenar);
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--kagit);
+  background: transparent;
+  border: 1px solid var(--kagit);
+  border-radius: 999px;
+  padding: 0.55rem 1.35rem;
+  cursor: pointer;
+}
+
+.menu-baglanti {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(2rem, 6vw, 3.75rem);
+  line-height: 1.25;
+  color: var(--kagit);
+  transition: color 0.2s ease;
+}
+
+.menu-baglanti:hover,
+.menu-baglanti[aria-current="page"] {
+  color: var(--kizil-parlak);
+}
+
+/* --------------------------------------------------------------------------
+   5. Kertenkele — sitenin imza motifi.
+      Her sayfada farklı ölçekte ve kadrajda görünür.
+   -------------------------------------------------------------------------- */
+
+.motif {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.motif img {
+  display: block;
+  width: 100%;
+  height: auto;
+  will-change: transform;
+}
+
+.motif--merkez {
+  top: 50%;
+  left: 50%;
+  width: min(420px, 42vw);
+  transform: translate(-50%, -46%);
+}
+
+.motif--tepe {
+  top: -14%;
+  left: 50%;
+  width: min(260px, 34vw);
+  transform: translateX(-50%) rotate(180deg);
+  opacity: 0.9;
+}
+
+.motif--sol {
+  top: -3rem;
+  left: -6rem;
+  width: min(300px, 38vw);
+  transform: rotate(-18deg);
+}
+
+.motif--kart {
+  top: -32%;
+  left: -14%;
+  width: min(460px, 64vw);
+  transform: rotate(-14deg);
+}
+
+/* --------------------------------------------------------------------------
+   6. Ana sayfa — açılış
+   -------------------------------------------------------------------------- */
+
+.acilis {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8rem var(--kenar) 3rem;
+  overflow: hidden;
+}
+
+.acilis-baslik {
+  position: relative;
+  z-index: 2;
+  max-width: 15ch;
+}
+
+.acilis-baslik em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--kizil-parlak);
+}
+
+.kaydir {
+  position: relative;
+  z-index: 2;
+  margin-top: auto;
+  padding-top: var(--bosluk-l);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--bosluk-s);
+}
+
+/* İnce dikey çizgi — taslaktan gelen ve bütün sayfalarda tekrar eden öge */
+.hat {
+  display: block;
+  width: 1px;
+  height: 5.5rem;
+  background: linear-gradient(to bottom, transparent, var(--kagit));
+}
+
+/* --------------------------------------------------------------------------
+   7. Bölüm kalıbı
+   -------------------------------------------------------------------------- */
+
+.bolum {
+  position: relative;
+  padding-block: var(--bosluk-xl);
+  overflow: hidden;
+}
+
+.bolum--ilk {
+  padding-top: 11rem;
+}
+
+.bolum-basi {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--bosluk-s);
+  margin-bottom: var(--bosluk-l);
+}
+
+.giris-metin {
+  position: relative;
+  z-index: 2;
+  max-width: 54ch;
+  margin: 0 auto var(--bosluk-l);
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   8. Proje ızgarası
+      Taslaktaki 2 büyük + 4 küçük düzeni, ortak 12 sütunluk ızgaraya oturtuldu;
+      böylece kutuların alt ve yan kenarları birbirini tutuyor.
+   -------------------------------------------------------------------------- */
+
+.izgara {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem;
+}
+
+.proje {
+  display: block;
+  grid-column: span 6;
+  position: relative;
+}
+
+.proje--kucuk { grid-column: span 3; }
+
+.proje-gorsel {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: 28px;
+  overflow: hidden;
+  background-color: var(--zemin-yuzey);
+  border: 1px solid var(--cizgi);
+}
+
+.proje--kucuk .proje-gorsel {
+  aspect-ratio: 1 / 1;
+  border-radius: 20px;
+}
+
+.proje-gorsel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease, opacity 0.35s ease;
+}
+
+.proje:hover .proje-gorsel img {
+  transform: scale(1.04);
+  opacity: 0.82;
+}
+
+.proje-bilgi {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--bosluk-s);
+  margin-top: 0.9rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--cizgi);
+}
+
+.proje-ad {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.375rem;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.proje:hover .proje-ad { color: var(--kizil-parlak); }
+
+.proje-yil {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  color: var(--kagit-solgun);
+  white-space: nowrap;
+}
+
+.proje-aciklama {
+  margin: 0.75rem 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--kagit-solgun);
+  max-width: 46ch;
+}
+
+/* --------------------------------------------------------------------------
+   9. Hakkımda
+      Taslakta sağ yarı boştu ve "Kullandığım Araçlar" havada duruyordu.
+      Burada metin ve araç listesi aynı ızgaraya oturuyor.
+   -------------------------------------------------------------------------- */
+
+.hakkimda-duzen {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 4fr 5fr 3fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.portre {
+  aspect-ratio: 3 / 4;
+  border-radius: 200px 200px 24px 24px;
+  overflow: hidden;
+  background-color: var(--zemin-yuzey);
+  border: 1px solid var(--cizgi);
+}
+
+.portre img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hakkimda-metin p { margin: 0 0 1.25rem; }
+.hakkimda-metin p:last-child { margin-bottom: 0; }
+
+.araclar { margin-top: 0; }
+
+.araclar h2 {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  letter-spacing: 0.02em;
+  margin: 0 0 var(--bosluk-s);
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--kagit);
+}
+
+.araclar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.araclar li {
+  font-size: 0.875rem;
+  color: var(--kagit-solgun);
+  padding-block: 0.5rem;
+  border-bottom: 1px solid var(--cizgi);
+}
+
+/* --------------------------------------------------------------------------
+   10. İletişim
+   -------------------------------------------------------------------------- */
+
+.iletisim-kart {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+  margin-inline: auto;
+  margin-top: 9rem;
+  background-color: var(--kagit);
+  color: var(--zemin);
+  border-radius: 130px;
+  padding: 4.5rem 3rem;
+  text-align: center;
+}
+
+.eposta {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: clamp(0.95rem, 2.6vw, 1.5rem);
+  letter-spacing: 0.02em;
+  color: var(--zemin);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.25s ease, color 0.25s ease;
+  word-break: break-word;
+}
+
+.eposta:hover {
+  color: var(--kizil);
+  border-bottom-color: var(--kizil);
+}
+
+.iletisim-kart .etiket { color: #6A6663; margin-bottom: 0.75rem; }
+
+.baglantilar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2.5rem;
+  margin-top: var(--bosluk-l);
+}
+
+.baglantilar a {
+  font-size: 0.8125rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--kagit-solgun);
+  transition: color 0.2s ease;
+}
+
+.baglantilar a:hover { color: var(--kizil-parlak); }
+
+/* --------------------------------------------------------------------------
+   11. Alt bilgi — menü her sayfada burada da bulunur
+   -------------------------------------------------------------------------- */
+
+.alt-bilgi {
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid var(--cizgi);
+  margin-top: var(--bosluk-xl);
+  padding-block: var(--bosluk-m);
+}
+
+.alt-bilgi .kabuk {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--bosluk-s);
+}
+
+.alt-menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.75rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.alt-menu a {
+  font-size: 0.8125rem;
+  letter-spacing: 0.1em;
+  color: var(--kagit-solgun);
+  transition: color 0.2s ease;
+}
+
+.alt-menu a:hover,
+.alt-menu a[aria-current="page"] { color: var(--kagit); }
+
+.telif {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--kagit-solgun);
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   12. Dar ekran düzenlemeleri
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  :root { --kenar: 1.5rem; --bosluk-xl: 5rem; }
+
+  .proje          { grid-column: span 12; }
+  .proje--kucuk   { grid-column: span 6; }
+
+  .hakkimda-duzen {
+    grid-template-columns: 1fr;
+    gap: var(--bosluk-m);
+  }
+
+  .portre {
+    max-width: 320px;
+    border-radius: 160px 160px 20px 20px;
+  }
+
+  .araclar { margin-top: var(--bosluk-s); }
+
+  .motif--sol  { left: -4rem; width: 200px; }
+  .motif--kart { top: -22%; left: -8%; width: 300px; }
+  .iletisim-kart { border-radius: 60px; padding: 3rem 1.75rem; margin-top: 7rem; }
+}
+
+@media (max-width: 600px) {
+  .ust-bar { padding: 1.15rem var(--kenar); }
+
+  .proje--kucuk { grid-column: span 12; }
+  .proje--kucuk .proje-gorsel { aspect-ratio: 4 / 3; }
+
+  .izgara { gap: var(--bosluk-m); }
+
+  .bolum--ilk { padding-top: 8rem; }
+
+  .motif--merkez { width: 62vw; }
+  .motif--tepe   { top: -6%; width: 42vw; }
+
+  .baglantilar { gap: 1.25rem 2rem; }
+
+  .alt-bilgi .kabuk {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   13. Hareketi azaltılmış tercih
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  /* Şerit dışında bütün animasyonlar kapanır; yavaş yatay akış
+     rahatsız edici hareket sınıfına girmediği için şerit sürer. */
+  *:not(.serit-ic),
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   14. Hareket katmanı
+      .js sınıfı animasyon dosyası tarafından eklenir; JavaScript yoksa
+      hiçbir öge gizlenmez, site olduğu gibi görünür.
+   -------------------------------------------------------------------------- */
+
+/* Kaydırınca beliren bloklar */
+.js .anim {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.7s ease var(--gecikme, 0s),
+    transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) var(--gecikme, 0s);
+}
+
+.js .anim.gorunur {
+  opacity: 1;
+  transform: none;
+}
+
+/* Açılış sıralaması: başlık, kertenkele, kaydırma ipucu */
+.js .acilis-baslik {
+  opacity: 0;
+  transform: translateY(46px);
+  transition: opacity 0.9s ease 0.15s, transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 0.15s;
+}
+
+.js .acilis .motif--merkez {
+  opacity: 0;
+  transition: opacity 1.4s ease 0.55s;
+}
+
+.js .acilis .kaydir {
+  opacity: 0;
+  transition: opacity 0.8s ease 1.1s;
+}
+
+.js body.yuklendi .acilis-baslik,
+.js .yuklendi .acilis-baslik { opacity: 1; transform: none; }
+.js .yuklendi .acilis .motif--merkez { opacity: 0.95; }
+.js .yuklendi .acilis .kaydir { opacity: 1; }
+
+/* Üst bar yumuşak giriş */
+.js .ust-bar {
+  opacity: 0;
+  transform: translateY(-12px);
+  transition: opacity 0.7s ease 0.9s, transform 0.7s ease 0.9s;
+}
+
+.js .yuklendi .ust-bar { opacity: 1; transform: none; }
+
+/* Kaydırma çizgisinde aşağı süzülen kızıl nokta */
+.hat { position: relative; overflow: visible; }
+
+.js .kaydir .hat::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--kizil-parlak);
+  transform: translateX(-50%);
+  animation: in 2.4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes in {
+  0%   { top: 0;    opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* Menü bağlantıları sırayla belirir */
+.js .menu-katman .menu-baglanti {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.js .menu-katman[data-acik="true"] .menu-baglanti {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(0.08s + var(--i, 0) * 0.06s);
+}
+
+/* Proje kartı üzerine gelince hafifçe kalkar */
+.js .proje .proje-gorsel {
+  transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.js .proje:hover .proje-gorsel {
+  transform: translateY(-6px);
+}
+
+/* --------------------------------------------------------------------------
+   15. Hizmet şeridi
+   -------------------------------------------------------------------------- */
+
+.serit {
+  overflow: hidden;
+  border-block: 1px solid var(--cizgi);
+  padding-block: 1.1rem;
+}
+
+.serit-ic {
+  display: flex;
+  align-items: center;
+  gap: 2.75rem;
+  width: max-content;
+  animation: kay 110s linear infinite;
+}
+
+.serit-ic span {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.375rem;
+  white-space: nowrap;
+  color: var(--kagit);
+}
+
+.serit-nokta {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--kizil);
+  flex: none;
+}
+
+@keyframes kay {
+  to { transform: translateX(-50%); }
+}
+
+.serit:hover .serit-ic { animation-play-state: paused; }
+
+/* --------------------------------------------------------------------------
+   16. İçerik yerleşim yardımcıları
+   -------------------------------------------------------------------------- */
+
+figure.proje { margin: 0; }
+
+.odak-ust  { object-position: center 12%; }
+.odak-orta { object-position: center 42%; }
+
+.devam {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--bosluk-l);
+}
+
+.devam-baglanti {
+  font-size: 0.8125rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--kagit);
+  border: 1px solid var(--kagit);
+  border-radius: 999px;
+  padding: 0.85rem 2rem;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.devam-baglanti:hover {
+  background-color: var(--kizil-parlak);
+  border-color: var(--kizil-parlak);
+  color: var(--zemin);
+}
+
+.iletisim-not {
+  max-width: 44ch;
+  margin: var(--bosluk-l) auto 0;
+  text-align: center;
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: var(--kagit-solgun);
+  position: relative;
+  z-index: 2;
+}
